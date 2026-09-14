@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Compras bajo 30 lucas</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#22314A">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icono-192.png">
+<link rel="apple-touch-icon" href="icono-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Compras 30">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --suelo: #EFEFEB;
+    --tela: #FAFAF8;
+    --tinta: #1C1D1F;
+    --gris: #65686C;
+    --hilo: #D5D6D1;
+    --foto: #E2E2DD;
+    --marino: #22314A;
+    --sobre-marino: #F3F5F8;
+    --oferta: #2E6A4E;
+    --display: "Archivo", "Arial Narrow", Arial, sans-serif;
+    --texto: "Instrument Sans", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --suelo: #141517; --tela: #1D1E21; --tinta: #EDEDEA; --gris: #9B9EA3; --hilo: #2F3135;
+      --foto: #28292D; --marino: #B1C3DE; --sobre-marino: #101826; --oferta: #86C9A6;
+    }
+  }
+  :root[data-theme="dark"] {
+    --suelo: #141517; --tela: #1D1E21; --tinta: #EDEDEA; --gris: #9B9EA3; --hilo: #2F3135;
+    --foto: #28292D; --marino: #B1C3DE; --sobre-marino: #101826; --oferta: #86C9A6;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--suelo); color: var(--tinta); font: 15px/1.45 var(--texto); padding-inline: 16px; -webkit-text-size-adjust: 100%; }
+  .wrap { max-width: 1200px; margin: 0 auto; }
+  a { color: inherit; }
+  button, select, input { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--marino); outline-offset: 2px; }
+  [hidden] { display: none !important; }
+
+  .top { padding-block: 28px 14px; display: grid; gap: 8px; }
+  .ojo { margin: 0; font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--gris); }
+  h1 { margin: 0; font-family: var(--display); font-stretch: 125%; font-weight: 800; font-size: clamp(30px, 7vw, 50px); line-height: 1; letter-spacing: -.015em; text-wrap: balance; }
+  .bajada { margin: 0; color: var(--gris); max-width: 60ch; }
+  .bajada b { color: var(--tinta); }
+
+  .pegado { position: sticky; top: 0; z-index: 10; background: var(--suelo); margin-inline: -16px; padding-inline: 16px; border-bottom: 1px solid var(--hilo); }
+  .tabs, .chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-block: 10px 4px; }
+  .tabs::-webkit-scrollbar, .chips::-webkit-scrollbar { display: none; }
+  .tab { flex: none; border: 1px solid var(--hilo); background: transparent; border-radius: 2px; padding: 8px 12px; font-weight: 600; font-size: 14px; cursor: pointer; display: inline-flex; gap: 6px; align-items: baseline; }
+  .tab span { font: 500 12px var(--mono); color: var(--gris); font-variant-numeric: tabular-nums; }
+  .tab[aria-selected="true"] { background: var(--tinta); border-color: var(--tinta); color: var(--suelo); }
+  .tab[aria-selected="true"] span { color: var(--suelo); opacity: .75; }
+  .chips { padding-block: 4px 8px; }
+  .chip { flex: none; font: 500 12px var(--mono); text-decoration: none; padding: 5px 9px; border: 1px solid var(--hilo); border-radius: 999px; color: var(--tinta); background: var(--tela); }
+  .ajustes { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding-block: 0 10px; font-size: 13px; }
+  .ajustes label { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
+  .ajustes select { background: var(--tela); border: 1px solid var(--hilo); border-radius: 2px; padding: 4px 6px; }
+  .ajustes input { accent-color: var(--marino); width: 16px; height: 16px; }
+  .ver-desc { background: none; border: none; padding: 0; text-decoration: underline; text-underline-offset: 3px; color: var(--gris); cursor: pointer; font-size: 13px; }
+
+  .recibida { margin-top: 14px; padding: 12px 14px; background: var(--tela); border: 1px solid var(--marino); display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; }
+  .recibida p { margin: 0; }
+  .btn { border: 1px solid var(--marino); background: var(--marino); color: var(--sobre-marino); border-radius: 2px; padding: 9px 14px; font-weight: 600; cursor: pointer; }
+
+  main { padding-bottom: 110px; }
+  section.cat { padding-top: 26px; scroll-margin-top: 150px; }
+  .sec { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 16px; margin-bottom: 12px; }
+  .sec h2 { margin: 0; font-family: var(--display); font-stretch: 115%; font-weight: 700; font-size: 24px; line-height: 1.1; }
+  .sec p { margin: 0; font: 12px var(--mono); color: var(--gris); font-variant-numeric: tabular-nums; }
+  .vacio { color: var(--gris); padding-block: 24px; margin: 0; }
+
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .card { background: var(--tela); border: 1px solid var(--hilo); border-radius: 2px; display: flex; flex-direction: column; position: relative; min-width: 0; }
+  .card[data-marca="si"] { border-color: var(--marino); box-shadow: inset 0 0 0 1px var(--marino); }
+  .card[data-marca="no"] { opacity: .5; }
+  .foto { display: block; aspect-ratio: 4 / 5; max-width: 100%; background: var(--foto); overflow: hidden; }
+  .foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .foto.sin { display: grid; place-items: center; color: var(--gris); font-size: 12px; text-decoration: none; }
+  .guardar { position: absolute; top: 8px; right: 8px; display: inline-flex; align-items: center; gap: 5px; min-height: 36px; padding: 0 11px; border-radius: 999px; border: 1px solid var(--hilo); background: var(--tela); color: var(--tinta); font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: 0 2px 8px -4px rgba(0, 0, 0, .35); }
+  .guardar svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
+  .guardar[aria-pressed="true"] { background: var(--marino); border-color: var(--marino); color: var(--sobre-marino); }
+  .guardar[aria-pressed="true"] svg { fill: currentColor; }
+  .cuerpo { padding: 10px 10px 12px; display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+  .tienda { margin: 0; font: 500 10.5px/1.3 var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--gris); overflow-wrap: anywhere; }
+  .cuerpo h3 { margin: 0; font: 600 14px/1.3 var(--texto); overflow-wrap: anywhere; }
+  .detalle { margin: 0; font-size: 12px; color: var(--gris); overflow-wrap: anywhere; }
+  .precio { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; margin-top: auto; padding-top: 6px; }
+  .monto { font: 500 18px/1 var(--mono); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .antes { font: 11.5px var(--mono); color: var(--gris); text-decoration: line-through; }
+  .dcto { font: 600 11.5px var(--mono); color: var(--oferta); }
+  .promo { margin: 2px 0 0; font-size: 12px; color: var(--oferta); font-weight: 500; overflow-wrap: anywhere; }
+  .acciones { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; justify-content: space-between; margin-top: 8px; }
+  .ver { font-size: 13px; color: var(--marino); font-weight: 600; text-decoration: none; }
+  .no { background: none; border: none; padding: 4px 0; font-size: 12px; color: var(--gris); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .no[aria-pressed="true"] { color: var(--tinta); font-weight: 600; }
+
+  .fuente { color: var(--gris); font-size: 12.5px; max-width: 70ch; margin: 36px 0 0; }
+  .bandeja { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--tinta); color: var(--suelo); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); }
+  .bandeja p { margin: 0; font-size: 14px; }
+  .bandeja b, .bandeja span { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .bandeja .btn { background: var(--suelo); color: var(--tinta); border-color: var(--suelo); }
+  .aviso-copia { position: fixed; left: 50%; bottom: 80px; transform: translateX(-50%); background: var(--marino); color: var(--sobre-marino); padding: 8px 14px; border-radius: 2px; font-size: 13px; z-index: 30; }
+
+  @media (min-width: 720px) {
+    body { padding-inline: 24px; }
+    .pegado { margin-inline: -24px; padding-inline: 24px; }
+    .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+    .cuerpo { padding: 12px 14px 14px; }
+    .monto { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <p class="ojo">Cotización · 13-09-2026 · 40 productos</p>
+    <h1>Compras bajo 30 lucas</h1>
+    <p class="bajada">Toca <b>Guardar</b> en lo que te guste: queda guardado en este teléfono. Cuando termines, aprieta <b>Enviar por WhatsApp</b>.</p>
+  </header>
+
+  <div class="pegado">
+    <nav class="tabs" id="tabs" role="tablist" aria-label="Secciones"></nav>
+    <div class="chips" id="chips"></div>
+    <div class="ajustes">
+      <label for="solo-ofertas"><input type="checkbox" id="solo-ofertas"> Solo ofertas</label>
+      <label for="orden">Ordenar
+        <select id="orden">
+          <option value="precio">Menor precio</option>
+          <option value="descuento">Mayor descuento</option>
+        </select>
+      </label>
+      <button type="button" class="ver-desc" id="ver-desc" hidden></button>
+    </div>
+  </div>
+
+  <div class="recibida" id="recibida" hidden>
+    <p id="recibida-texto"></p>
+    <button type="button" class="btn" id="guardar-recibida">Guardar todos en mi teléfono</button>
+  </div>
+
+  <main id="contenido"></main>
+
+  <p class="fuente">Precio, foto y link leídos directo de cada tienda el 13-09-2026. Los precios cambian y no asegura que quede la talla: revísalo en la tienda antes de pagar. Lo que guardas queda solo en este teléfono (no uses modo incógnito). Para tenerla como app: menú del navegador → «Agregar a pantalla de inicio».</p>
+</div>
+
+<div class="bandeja" id="bandeja" hidden>
+  <p><b id="b-n">0</b> guardados · <span id="b-suma">$0</span></p>
+  <button type="button" class="btn" id="enviar">Enviar por WhatsApp</button>
+</div>
+
+<script type="application/json" id="datos">{"grupos":[{"id":"mi","titulo":"Para mí","cats":[{"id":"polerones","titulo":"Polerones","n":10},{"id":"poleras","titulo":"Poleras","n":10},{"id":"camisas","titulo":"Camisas","n":10},{"id":"pantalones","titulo":"Pantalones","n":10}]},{"id":"ella","titulo":"Para ella","cats":[]},{"id":"casa","titulo":"Casa","cats":[]},{"id":"bebe","titulo":"Bebé 6–9 meses","cats":[]}],"productos":[{"id":"8f352a60","g":"mi","c":"polerones","n":"Polerón Hombre Herald (medio cierre)","t":"Herald · Hites","p":14990,"a":24990,"pr":"","co":"Negro (tejido jaspeado; en la foto se ve gris oscuro)","e":"medio cierre con cuello alto, tejido","d":"100% poliéster","u":"https://www.hites.com/poleron-hombre-herald-964776.html","f":"fotos/8f352a60.jpg"},{"id":"f12111eb","g":"mi","c":"polerones","n":"Polerón Hombre Az Black (capucha y cierre)","t":"Az Black · Hites","p":14990,"a":29990,"pr":"","co":"Gris claro melange","e":"con capucha y cierre completo","d":"65% algodón, 35% poliéster","u":"https://www.hites.com/poleron-hombre-az-black-964275.html","f":"fotos/f12111eb.jpg"},{"id":"4dabafed","g":"mi","c":"polerones","n":"Polar Deportivo Hombre Mountain Gear Manga Larga","t":"Mountain Gear · Falabella","p":13990,"a":19990,"pr":"","co":"Negro","e":"polar con cierre completo y cuello alto","d":"100% poliéster","u":"https://www.falabella.com/falabella-cl/product/883275277/Polar-Deportivo-Hombre-Mountain-Gear","f":"fotos/4dabafed.jpg"},{"id":"642efec6","g":"mi","c":"polerones","n":"Polerón Capucha Zipper Unicolor","t":"Opposite · Paris","p":16990,"a":0,"pr":"","co":"Negro","e":"con capucha y cierre completo","d":"60% algodón, 40% poliéster","u":"https://www.paris.cl/poleron-capucha-zipper-unicolor-238694.html","f":"fotos/642efec6.jpg"},{"id":"2c0f8619","g":"mi","c":"polerones","n":"Polerón OG Heritage Café","t":"O'Neill Chile","p":17990,"a":44990,"pr":"","co":"Café melange","e":"con capucha y cierre completo, forro de chiporro","d":"","u":"https://www.oneill.cl/poleron-full-ziper-og-heritage--cafe/p","f":"fotos/2c0f8619.jpg"},{"id":"8c731612","g":"mi","c":"polerones","n":"Polerón Polar Casper Café Claro","t":"O'Neill Chile","p":19990,"a":39990,"pr":"","co":"Café claro / camel","e":"polar con cierre completo y cuello alto","d":"Polar (la tienda no informa porcentajes)","u":"https://www.oneill.cl/poleron-full-ziper-casper--cafe-claro/p","f":"fotos/8c731612.jpg"},{"id":"5ac15b69","g":"mi","c":"polerones","n":"Polerón Capucha con Bolsillo Canguro Básico","t":"Opposite · Paris","p":19990,"a":0,"pr":"","co":"Negro","e":"canguro con capucha","d":"60% algodón, 40% poliéster","u":"https://www.paris.cl/poleron-capucha-con-bolisllo-canguro-basico-231875.html","f":"fotos/5ac15b69.jpg"},{"id":"84540050","g":"mi","c":"polerones","n":"Polerón Lineup Beige Claro","t":"O'Neill Chile","p":23990,"a":29990,"pr":"","co":"Beige claro / blanco hueso","e":"cuello redondo","d":"60% algodón, 40% poliéster","u":"https://www.oneill.cl/poleron-lineup--beige-claro/p","f":"fotos/84540050.jpg"},{"id":"f72ce90b","g":"mi","c":"polerones","n":"Polerón Hombre Levi's Cuello Redondo con logotipo mini Batwing","t":"Levi's Chile","p":28194,"a":46990,"pr":"","co":"Gris melange (Mid Tone Grey Heather)","e":"cuello redondo","d":"100% algodón (French Terry)","u":"https://www.levi.cl/poleron-hombre-levis-cuello-redondo-con-logotipo-mini-batwing-35909-0002/p","f":"fotos/f72ce90b.jpg"},{"id":"8bf409c0","g":"mi","c":"polerones","n":"Polerón Hobby Hombre","t":"Doite","p":29990,"a":0,"pr":"","co":"Verde oliva","e":"canguro con capucha (calce oversize, sin cierre)","d":"Algodón y poliéster con interior cardado (la tienda no informa porcentajes)","u":"https://www.doite.cl/products/poleron-hobby-hombre-doite","f":"fotos/8bf409c0.jpg"},{"id":"273ba35c","g":"mi","c":"poleras","n":"Polera Henley","t":"Aussie · Paris","p":11040,"a":16990,"pr":"","co":"Gris oscuro (Marengo)","e":"henley (con botones), manga corta","d":"100% Algodón Single Jersey","u":"https://www.paris.cl/polera-henley-410926.html","f":"fotos/273ba35c.jpg"},{"id":"9827b9fc","g":"mi","c":"poleras","n":"Polera Básica Lisa Algodón","t":"Springfield · Paris","p":11890,"a":16990,"pr":"","co":"Blanco","e":"básica cuello redondo, corte boxy (holgado)","d":"100% Algodón","u":"https://www.paris.cl/polera-basica-lisa-algodon-461068.html","f":"fotos/9827b9fc.jpg"},{"id":"b727e9ce","g":"mi","c":"poleras","n":"Polera MC Básica Logo Embroidery Negro","t":"Ellus","p":12990,"a":19990,"pr":"","co":"Negro","e":"básica cuello redondo, logo bordado mínimo tono sobre tono","d":"100% algodón","u":"https://www.ellus.cl/polera_hombre_mc_basica_logo_embroidery_negro/p","f":"fotos/b727e9ce.jpg"},{"id":"21f6b6a8","g":"mi","c":"poleras","n":"Polera Hombre Regular Verde Militar (Pocket Tee)","t":"Wrangler Chile","p":16990,"a":0,"pr":"","co":"Verde oliva (verde militar)","e":"cuello redondo con bolsillo, regular fit","d":"100% algodón","u":"https://wrangler.cl/products/polera-hombre-ss-pocket-tee-regular-verde-militar","f":"fotos/21f6b6a8.jpg"},{"id":"d5a52946","g":"mi","c":"poleras","n":"Polera Hombre Polo Regular White","t":"Wrangler Chile","p":19990,"a":24990,"pr":"","co":"Blanco hueso","e":"polo piqué, regular fit","d":"","u":"https://wrangler.cl/products/polera-hombre-polo-regular-white","f":"fotos/d5a52946.jpg"},{"id":"2e62171b","g":"mi","c":"poleras","n":"Polera Hombre Regular Fit Silicone Wash Avena","t":"Ellus","p":19990,"a":0,"pr":"","co":"Beige (avena)","e":"cuello redondo regular fit, texto en relieve tono sobre tono","d":"100% algodón","u":"https://www.ellus.cl/polera_hombre_regular_fit_silicone_wash_avena/p","f":"fotos/2e62171b.jpg"},{"id":"b623ec88","g":"mi","c":"poleras","n":"Polera Hombre Patch Regular Fit Azul","t":"Wrangler Chile","p":16990,"a":0,"pr":"","co":"Azul marino (la tienda lo llama Azul)","e":"básica cuello redondo, parche pequeño en el pecho, regular fit","d":"100% algodón","u":"https://wrangler.cl/products/polera-hombre-cuello-redondo-con-parche-regular-fit-100-cotton-azul","f":"fotos/b623ec88.jpg"},{"id":"916b3ee3","g":"mi","c":"poleras","n":"Polera Manga Corta Cuello V Básica Sólida Azul Marino","t":"Nautica Chile","p":22900,"a":0,"pr":"","co":"Azul marino","e":"cuello V, logo bordado pequeño","d":"100% algodón","u":"https://nautica.cl/products/polera-manga-corta-cuello-v-basica-solida-azul-marino-hombre","f":"fotos/916b3ee3.jpg"},{"id":"54deaf81","g":"mi","c":"poleras","n":"Polera de Algodón Supima de Cuello Redondo","t":"Calvin Klein Chile","p":22194,"a":36990,"pr":"","co":"Café","e":"básica cuello redondo lisa, algodón supima","d":"100% Algodón Pima","u":"https://www.calvinklein.cl/polera-algodon-supima-cuello-redondo-40bm239034/p","f":"fotos/54deaf81.jpg"},{"id":"7749f620","g":"mi","c":"poleras","n":"Polera Manga Larga Cuello Redondo Básica Sólida Grafito","t":"Nautica Chile","p":26900,"a":0,"pr":"","co":"Gris grafito","e":"manga larga cuello redondo, logo bordado pequeño","d":"100% algodón","u":"https://nautica.cl/products/polera-manga-larga-cuello-redondo-basica-solida-grafito-hombre","f":"fotos/7749f620.jpg"},{"id":"9e4fa0e0","g":"mi","c":"camisas","n":"Camisa Poplin Rayas Manga Larga","t":"Alaniz · Paris","p":12890,"a":42990,"pr":"","co":"Celeste con rayas finas blancas","e":"popelina rayas finas manga larga","d":"100% Algodón","u":"https://www.paris.cl/camisa-poplin-rayas-manga-larga-231823.html","f":"fotos/9e4fa0e0.jpg"},{"id":"4bd5bb25","g":"mi","c":"camisas","n":"Camisa Hombre Oxford Blanco","t":"Fashion's Park","p":12990,"a":0,"pr":"","co":"Blanco","e":"oxford manga larga, cuello abotonado y bolsillo","d":"","u":"https://fashionspark.com/products/camisa-hombre-oxford-blanco-950372202","f":"fotos/4bd5bb25.jpg"},{"id":"0f130d30","g":"mi","c":"camisas","n":"Camisa Manga Larga Algodón Hombre Newport Regular Fit","t":"Newport · Falabella","p":14990,"a":0,"pr":"","co":"Beige","e":"oxford casual button down regular fit","d":"60% algodón y 40% poliéster","u":"https://www.falabella.com/falabella-cl/product/883271991/camisa-manga-larga-algodon-hombre-newport-regular-fit/883272002","f":"fotos/0f130d30.jpg"},{"id":"7043c3de","g":"mi","c":"camisas","n":"Camisa Lino Algodón Boris Celeste","t":"Trial","p":15990,"a":39990,"pr":"","co":"Celeste","e":"lino manga corta slim fit","d":"55% Lino 45% Algodón","u":"https://www.trial.cl/camisa-lino-algodon-boris-celeste-1131218112/p","f":"fotos/7043c3de.jpg"},{"id":"7eae4a8a","g":"mi","c":"camisas","n":"Camisa easy-iron Slim Fit","t":"H&M Chile","p":16990,"a":0,"pr":"","co":"Azul claro","e":"popelina lisa formal slim fit (fácil de planchar)","d":"Poliéster 65%, Algodón 35%","u":"https://cl.hm.com/1242812006/p","f":"fotos/7eae4a8a.jpg"},{"id":"e7185fdc","g":"mi","c":"camisas","n":"Camisa Lisa Algodón Basilio Gris Oscuro","t":"Trial","p":19990,"a":49990,"pr":"","co":"Gris oscuro","e":"algodón liso manga larga slim fit, cuello abotonado","d":"100% Algodón","u":"https://www.trial.cl/camisa-lisa-algodon-basilio-gris-oscuro-1131216172/p","f":"fotos/e7185fdc.jpg"},{"id":"8dd9cb10","g":"mi","c":"camisas","n":"Camisa Lisa Regular Manga Larga Hombre Hummer","t":"Hummer · Hites","p":21990,"a":39990,"pr":"","co":"Azul marino","e":"popelina lisa manga larga regular","d":"98% Algodón, 2% Spandex","u":"https://www.hites.com/camisa-lisa-regular-manga-larga-hombre-hummer-955732.html","f":"fotos/8dd9cb10.jpg"},{"id":"4b809075","g":"mi","c":"camisas","n":"Camisa Franela Lisa F Military","t":"Ferouch","p":24950,"a":49900,"pr":"","co":"Verde oliva","e":"franela lisa manga larga slim fit","d":"100% Algodón","u":"https://www.ferouch.cl/camisa-franela-lisa-f-military/p","f":"fotos/4b809075.jpg"},{"id":"fe958b56","g":"mi","c":"camisas","n":"Camisa Lino Cuello Mao F Sky","t":"Ferouch","p":27450,"a":54900,"pr":"","co":"Celeste","e":"lino cuello mao manga larga","d":"55% Lino 45% Algodón","u":"https://www.ferouch.cl/camisa-lino-cuello-mao--f-sky/p","f":"fotos/fe958b56.jpg"},{"id":"015af69e","g":"mi","c":"camisas","n":"Camisa Cotelé ML Hombre Burgos Crudo","t":"Trial","p":27490,"a":54990,"pr":"","co":"Crudo","e":"microcotelé manga larga classic fit","d":"100% Algodón","u":"https://www.trial.cl/camisa-ml-hombre-burgos-crudo-1131221213/p","f":"fotos/015af69e.jpg"},{"id":"4b5feecf","g":"mi","c":"pantalones","n":"Pantalón hombre clásico azul oscuro","t":"Baldini · Tricot","p":12990,"a":31990,"pr":"","co":"Azul oscuro","e":"pantalón de vestir clásico","d":"65% Poliéster, 35% Algodón","u":"https://www.tricot.cl/pantalon-hombre-clasico-azul-oscuro-540255.html","f":"fotos/4b5feecf.jpg"},{"id":"b67d629a","g":"mi","c":"pantalones","n":"Jeans Slim Hombre Negro","t":"Fashion's Park","p":12990,"a":17990,"pr":"","co":"Negro","e":"jeans slim negro liso","d":"Algodón con spandex (la tienda no informa porcentajes)","u":"https://fashionspark.com/products/jeans-hombre-slim-negro-670738301","f":"fotos/b67d629a.jpg"},{"id":"a8ea9b38","g":"mi","c":"pantalones","n":"Pantalón Hombre Kenneth Stevens Algodón Recto Chino","t":"Kenneth Stevens · Ripley","p":13190,"a":21990,"pr":"","co":"Caqui","e":"chino recto","d":"100% Algodón","u":"https://simple.ripley.cl/pantalon-hombre-kenneth-stevens-algodon-recto-chino-2000409510757","f":"fotos/a8ea9b38.jpg"},{"id":"5cf3e27a","g":"mi","c":"pantalones","n":"Pantalón Hombre Calce Recto Gris Oscuro","t":"Fashion's Park","p":16990,"a":19990,"pr":"","co":"Gris oscuro","e":"jogger/cargo sobrio (cintura elástica con cordón, bolsillos laterales tipo cargo)","d":"","u":"https://fashionspark.com/products/pantalon-hombre-calce-recto-gris-oscuro-971013003","f":"fotos/5cf3e27a.jpg"},{"id":"aad4778c","g":"mi","c":"pantalones","n":"Pantalón Hombre Marquis Algodón Slim Chino Lavado","t":"Marquis · Ripley","p":17990,"a":29990,"pr":"","co":"Gris","e":"chino slim","d":"98% Algodón / 2% Spandex","u":"https://simple.ripley.cl/pantalon-hombre-marquis-algodon-slim-chino-lavado-2000402475077","f":"fotos/aad4778c.jpg"},{"id":"cb9dc5dd","g":"mi","c":"pantalones","n":"Pantalón Hombre Peroe (cotelé 5 bolsillos)","t":"Peroe · Hites","p":19990,"a":34990,"pr":"","co":"Café","e":"cotelé recto 5 bolsillos","d":"Algodón","u":"https://www.hites.com/pantalon-hombre-peroe-965606.html?dwvar_965606_color=CAFE","f":"fotos/cb9dc5dd.jpg"},{"id":"867775be","g":"mi","c":"pantalones","n":"Pantalón Chino Gabardina Slim Fit Hombre Basement","t":"Basement · Falabella","p":19990,"a":29990,"pr":"","co":"Beige","e":"chino slim gabardina","d":"96% algodón y 4% elastano","u":"https://www.falabella.com/falabella-cl/product/883120054/pantalon-chino-gabardina-slim-fit-hombre-basement","f":"fotos/867775be.jpg"},{"id":"68ffbecf","g":"mi","c":"pantalones","n":"Pantalón en mezcla de lino Relaxed Fit","t":"H&M","p":24493,"a":34990,"pr":"","co":"Crema","e":"pantalón de lino con pinzas, corte relajado","d":"Mezcla de algodón y lino (la tienda no informa porcentajes en este color)","u":"https://cl.hm.com/1275592001/p","f":"fotos/68ffbecf.jpg"},{"id":"5548be6f","g":"mi","c":"pantalones","n":"Pantalón Hombre Cascais","t":"Cascais · Falabella","p":27990,"a":39990,"pr":"","co":"Azul oscuro (la tienda lo llama Azul)","e":"pantalón 5 bolsillos de sarga (twill), corte recto","d":"98% Algodón y 2% Elastano","u":"https://www.falabella.com/falabella-cl/product/883688370/Pantal%C3%B3n-Hombre-Cascais","f":"fotos/5548be6f.jpg"},{"id":"c49865fe","g":"mi","c":"pantalones","n":"Jeans Skinny Fit Azul Marino Oscuro","t":"Maui and Sons","p":28990,"a":36990,"pr":"","co":"Azul marino oscuro (jeans)","e":"jeans skinny lavado oscuro liso","d":"","u":"https://mauiandsons.cl/hombre-vestuario-pantalon-jeans-5n268-mt-skinny-azul-marino-oscuro-5n268-1000323090.html","f":"fotos/c49865fe.jpg"}]}</script>
+<script>
+(function () {
+  "use strict";
+  var D = JSON.parse(document.getElementById("datos").textContent);
+  var CLAVE = "compras30-v1";
+  var porId = {};
+  var tituloCat = {};
+  D.productos.forEach(function (p) { porId[p.id] = p; });
+  D.grupos.forEach(function (g) { g.cats.forEach(function (c) { tituloCat[c.id] = c.titulo; }); });
+  var ordenCats = [];
+  D.grupos.forEach(function (g) { g.cats.forEach(function (c) { ordenCats.push(c.id); }); });
+
+  function leer(k, d) { try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } }
+  function escribir(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+
+  var marcas = leer(CLAVE, {});
+  var tab = leer(CLAVE + "-tab", "mi");
+  var soloOfertas = false, orden = "precio", verDescartados = false;
+  var recibida = [];
+  var q = new URLSearchParams(location.search).get("lista");
+  if (q) {
+    recibida = q.split(".").filter(function (id) { return porId[id]; });
+    if (recibida.length) tab = "recibida";
+  }
+  if (tab === "recibida" && !recibida.length) tab = "mi";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var ICONO = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.3-4.4-9.2-8.9C1.5 8.6 3.5 5 7 5c2 0 3.5 1.1 5 3 1.5-1.9 3-3 5-3 3.5 0 5.5 3.6 4.2 6.6-1.9 4.5-9.2 8.9-9.2 8.9z"/></svg>';
+
+  function esc(s) { return String(s || "").replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function pesos(n) { return "$" + Number(n).toLocaleString("es-CL"); }
+  function pct(p) { return p.a > p.p ? Math.round((1 - p.p / p.a) * 100) : 0; }
+
+  function tabs() {
+    var nGuard = D.productos.filter(function (p) { return marcas[p.id] === "si"; }).length;
+    var lista = D.grupos.map(function (g) {
+      var n = D.productos.filter(function (p) { return p.g === g.id; }).length;
+      return { id: g.id, titulo: g.titulo, n: n };
+    });
+    lista.push({ id: "guardados", titulo: "Guardados", n: nGuard });
+    if (recibida.length) lista.unshift({ id: "recibida", titulo: "Lista recibida", n: recibida.length });
+    $("tabs").innerHTML = lista.map(function (t) {
+      return '<button type="button" class="tab" role="tab" id="tab-' + t.id + '" data-tab="' + t.id + '" aria-selected="' + (t.id === tab) + '">' + esc(t.titulo) + ' <span>' + t.n + '</span></button>';
+    }).join("");
+  }
+
+  function productosDelTab() {
+    if (tab === "guardados") return D.productos.filter(function (p) { return marcas[p.id] === "si"; });
+    if (tab === "recibida") return recibida.map(function (id) { return porId[id]; });
+    return D.productos.filter(function (p) { return p.g === tab; });
+  }
+
+  function tarjeta(p) {
+    var m = marcas[p.id] || "";
+    var d = pct(p);
+    var foto = p.f
+      ? '<a class="foto" href="' + esc(p.u) + '" target="_blank" rel="noopener"><img src="' + esc(p.f) + '" alt="' + esc(p.n) + '" loading="lazy" decoding="async"></a>'
+      : '<a class="foto sin" href="' + esc(p.u) + '" target="_blank" rel="noopener">Ver foto en la tienda</a>';
+    var sub = [p.co, p.e].filter(Boolean).join(" · ");
+    return '<article class="card" data-id="' + p.id + '" data-marca="' + m + '">' + foto +
+      '<button type="button" class="guardar" data-accion="si" aria-pressed="' + (m === "si") + '">' + ICONO + '<span>' + (m === "si" ? "Guardado" : "Guardar") + '</span></button>' +
+      '<div class="cuerpo">' +
+        '<p class="tienda">' + esc(p.t) + '</p>' +
+        '<h3>' + esc(p.n) + '</h3>' +
+        (sub ? '<p class="detalle">' + esc(sub) + '</p>' : '') +
+        (p.d ? '<p class="detalle">' + esc(p.d) + '</p>' : '') +
+        '<div class="precio"><span class="monto">' + pesos(p.p) + '</span>' +
+          (d >= 5 && d <= 70 ? '<span class="antes">' + pesos(p.a) + '</span><span class="dcto">−' + d + ' %</span>' : '') +
+        '</div>' +
+        (p.pr ? '<p class="promo">' + esc(p.pr) + '</p>' : '') +
+        '<div class="acciones"><a class="ver" href="' + esc(p.u) + '" target="_blank" rel="noopener">Ver en la tienda ↗</a>' +
+        '<button type="button" class="no" data-accion="no" aria-pressed="' + (m === "no") + '">' + (m === "no" ? "Descartado" : "No me gusta") + '</button></div>' +
+      '</div></article>';
+  }
+
+  function render() {
+    tabs();
+    var todos = productosDelTab();
+    var ocultosNo = 0;
+    var visibles = todos.filter(function (p) {
+      if (soloOfertas && !(pct(p) >= 5 && pct(p) <= 70) && !p.pr) return false;
+      if (tab !== "guardados" && tab !== "recibida" && marcas[p.id] === "no" && !verDescartados) { ocultosNo++; return false; }
+      return true;
+    });
+    visibles.sort(function (a, b) { return orden === "descuento" ? (pct(b) - pct(a)) || (a.p - b.p) : a.p - b.p; });
+
+    var porCat = {};
+    visibles.forEach(function (p) { (porCat[p.c] = porCat[p.c] || []).push(p); });
+    var cats = ordenCats.filter(function (c) { return porCat[c]; });
+
+    $("chips").innerHTML = cats.length > 1 ? cats.map(function (c) {
+      return '<a class="chip" href="#cat-' + c + '">' + esc(tituloCat[c]) + ' ' + porCat[c].length + '</a>';
+    }).join("") : "";
+    $("chips").hidden = cats.length < 2;
+
+    var vd = $("ver-desc");
+    var nDesc = todos.filter(function (p) { return marcas[p.id] === "no"; }).length;
+    vd.hidden = tab === "guardados" || tab === "recibida" || nDesc === 0;
+    vd.textContent = verDescartados ? "Ocultar descartados" : "Ver descartados (" + nDesc + ")";
+
+    if (!cats.length) {
+      $("contenido").innerHTML = '<p class="vacio">' + (tab === "guardados"
+        ? "Todavía no guardas nada. Toca «Guardar» en lo que te guste."
+        : "Nada que mostrar con estos filtros.") + '</p>';
+    } else {
+      $("contenido").innerHTML = cats.map(function (c) {
+        var ps = porCat[c], precios = ps.map(function (p) { return p.p; });
+        return '<section class="cat" id="cat-' + c + '"><header class="sec"><h2>' + esc(tituloCat[c]) + '</h2><p>' +
+          ps.length + ' · ' + pesos(Math.min.apply(null, precios)) + ' a ' + pesos(Math.max.apply(null, precios)) +
+          '</p></header><div class="grid">' + ps.map(tarjeta).join("") + '</div></section>';
+      }).join("");
+    }
+
+    $("recibida").hidden = tab !== "recibida";
+    if (tab === "recibida") $("recibida-texto").textContent = "Te mandaron una lista con " + recibida.length + (recibida.length === 1 ? " producto." : " productos.");
+    bandeja();
+  }
+
+  function bandeja() {
+    var g = D.productos.filter(function (p) { return marcas[p.id] === "si"; });
+    $("bandeja").hidden = g.length === 0;
+    $("b-n").textContent = g.length;
+    $("b-suma").textContent = pesos(g.reduce(function (s, p) { return s + p.p; }, 0));
+  }
+
+  function marcar(id, accion) {
+    marcas[id] = marcas[id] === accion ? "" : accion;
+    if (!marcas[id]) delete marcas[id];
+    escribir(CLAVE, marcas);
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    var m = marcas[id] || "";
+    var sacar = (tab === "guardados" && m !== "si") || (m === "no" && !verDescartados && tab !== "guardados" && tab !== "recibida");
+    if (sacar) { render(); return; }
+    if (card) {
+      card.dataset.marca = m;
+      var g = card.querySelector(".guardar"), n = card.querySelector(".no");
+      g.setAttribute("aria-pressed", String(m === "si"));
+      g.querySelector("span").textContent = m === "si" ? "Guardado" : "Guardar";
+      n.setAttribute("aria-pressed", String(m === "no"));
+      n.textContent = m === "no" ? "Descartado" : "No me gusta";
+    }
+    tabs();
+    bandeja();
+  }
+
+  function mensaje() {
+    var g = D.productos.filter(function (p) { return marcas[p.id] === "si"; });
+    g.sort(function (a, b) { return ordenCats.indexOf(a.c) - ordenCats.indexOf(b.c) || a.p - b.p; });
+    var total = g.reduce(function (s, p) { return s + p.p; }, 0);
+    var t = "Mis guardados (" + g.length + ", total " + pesos(total) + "):\n";
+    var cat = "";
+    g.forEach(function (p) {
+      if (p.c !== cat) { cat = p.c; t += "\n" + tituloCat[cat] + "\n"; }
+      t += "• " + p.n + " — " + pesos(p.p) + "\n";
+    });
+    t += "\nMíralos con foto aquí: " + location.origin + location.pathname + "?lista=" + g.map(function (p) { return p.id; }).join(".");
+    return t;
+  }
+
+  function avisoCorto(texto) {
+    var a = document.createElement("div");
+    a.className = "aviso-copia";
+    a.textContent = texto;
+    document.body.appendChild(a);
+    setTimeout(function () { a.remove(); }, 2600);
+  }
+
+  $("tabs").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-tab]");
+    if (!b) return;
+    tab = b.dataset.tab;
+    verDescartados = false;
+    escribir(CLAVE + "-tab", tab === "recibida" ? "mi" : tab);
+    render();
+    window.scrollTo({ top: document.querySelector(".pegado").offsetTop, behavior: "auto" });
+  });
+  $("contenido").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-accion]");
+    if (!b) return;
+    marcar(b.closest(".card").dataset.id, b.dataset.accion);
+  });
+  $("solo-ofertas").addEventListener("change", function (e) { soloOfertas = e.target.checked; render(); });
+  $("orden").addEventListener("change", function (e) { orden = e.target.value; render(); });
+  $("ver-desc").addEventListener("click", function () { verDescartados = !verDescartados; render(); });
+  $("guardar-recibida").addEventListener("click", function () {
+    recibida.forEach(function (id) { marcas[id] = "si"; });
+    escribir(CLAVE, marcas);
+    avisoCorto("Guardados en este teléfono");
+    render();
+  });
+  $("enviar").addEventListener("click", function () {
+    var texto = mensaje();
+    if (navigator.share) {
+      navigator.share({ text: texto }).catch(function () {});
+    } else {
+      window.open("https://wa.me/?text=" + encodeURIComponent(texto), "_blank", "noopener");
+    }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
